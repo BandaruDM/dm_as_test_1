@@ -28,3 +28,26 @@ jobs:
       # The API-key: generated in the DCP Admin app (https://admin.dataminer.services/) as authentication for a certain DataMiner System.
       api-key: ${{ secrets.DATAMINER_LAKSHMI_DEMO }}
       sonarCloudToken: ${{ secrets.SONAR_TOKEN }}
+    
+  # # Optional 0 or More CD Jobs as needed
+  CD:
+    if: github.ref_type == 'tag'
+    environment: production
+    name: CD
+    runs-on: ubuntu-latest
+    needs: CI
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Skyline DataMiner Deploy Action
+        uses: SkylineCommunications/Skyline-DataMiner-Deploy-Action@v1
+        with:
+          # Stage deploy
+          stage: Deploy
+          # The API-key: generated in the DCP Admin app (https://admin.dataminer.services/) as authentication for a certain DataMiner System.
+          api-key: ${{ secrets.DATAMINER_LAKSHMI_DEMO }}
+          solution-path: AutomationScript.sln
+          # Id of the uploaded artifact
+          artifact-id: ${{ needs.CI.outputs.artifact-id }}
+          version: 1.0.1
+          build-number: ${{ github.run_number }}
