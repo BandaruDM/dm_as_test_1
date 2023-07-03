@@ -58,7 +58,8 @@ jobs:
           stage: All
           # The API-key: generated in the DCP Admin app (https://admin.dataminer.services/) as authentication for a certain DataMiner System.
           api-key: ${{ secrets.DATAMINER_LAKSHMI_DEMO }}
-          solution-path: ./${{ steps.findSlnFile.outputs.solutionFilePath }}
+          # solution-path: ./${{ steps.findSlnFile.outputs.solutionFilePath }}
+          solution-path: ./AutomationScript.sln
           # Id of the uploaded artifact
           # artifact-id: ${{ needs.CI.outputs.artifact-id }}
           artifact-name: ${{ github.repository }} ${{ github.ref_name }}
