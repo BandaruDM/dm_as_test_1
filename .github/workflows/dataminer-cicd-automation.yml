@@ -50,6 +50,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Skyline DataMiner Deploy Action
+        id: findSlnFile 
         uses: SkylineCommunications/Skyline-DataMiner-Deploy-Action@v1
               
         with:
