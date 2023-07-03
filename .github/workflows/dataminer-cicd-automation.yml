@@ -48,4 +48,3 @@ jobs:
           api-key: ${{ secrets.DATAMINER_LAKSHMI_DEMO }}
           solution-path: AutomationScript.sln
           # Id of the uploaded artifact
-          artifact-id: ${{ needs.CI.outputs.artifact-id }}
