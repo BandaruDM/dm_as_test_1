@@ -28,7 +28,6 @@ jobs:
       # The API-key: generated in the DCP Admin app (https://admin.dataminer.services/) as authentication for a certain DataMiner System.
       api-key: ${{ secrets.DATAMINER_LAKSHMI_DEMO }}
       sonarCloudToken: ${{ secrets.SONAR_TOKEN }}
-      artifact-name: ${{ github.repository }} ${{ github.ref_name }}_B${{ github.run_number }}
     
   # # Optional 0 or More CD Jobs as needed
   CD:
@@ -49,4 +48,4 @@ jobs:
           api-key: ${{ secrets.DATAMINER_LAKSHMI_DEMO }}
           solution-path: AutomationScript.sln
           # Id of the uploaded artifact
-          artifact-name: ${{ github.repository }} ${{ github.ref_name }}_B${{ github.run_number }}
+          artifact-id: ${{ needs.CI.outputs.artifact-id }}
