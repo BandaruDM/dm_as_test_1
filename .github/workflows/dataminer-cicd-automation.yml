@@ -40,7 +40,7 @@ jobs:
     
   # # Optional 0 or More CD Jobs as needed
   CD:
-    # if: github.ref_type == 'tag'
+    if: github.ref_type == 'tag'
     environment: production
     name: CD
     runs-on: ubuntu-latest
@@ -48,11 +48,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
       - name: Skyline DataMiner Deploy Action
         id: findSlnFile 
         uses: SkylineCommunications/Skyline-DataMiner-Deploy-Action@v1
-              
         with:
           # Stage deploy
           stage: All
