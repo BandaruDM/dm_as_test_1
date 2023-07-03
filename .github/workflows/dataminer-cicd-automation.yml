@@ -61,3 +61,4 @@ jobs:
           # Id of the uploaded artifact
           # artifact-id: ${{ needs.CI.outputs.artifact-id }}
           artifact-name: ${{ github.repository }} ${{ github.ref_name }}
+          version: ${{ github.ref_name }}
