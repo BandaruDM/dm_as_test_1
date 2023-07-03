@@ -4,7 +4,7 @@ name: DataMiner CICD Automation
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: []
+    branches: [master]
     tags:
       - "[0-9]+.[0-9]+.[0-9]+.[0-9]+"
       - "[0-9]+.[0-9]+.[0-9]+.[0-9]+-**"
@@ -36,7 +36,7 @@ jobs:
     needs: CI
     steps:
       - name: Post Actions
-        run: echo  ${{ needs.CI.outputs.artifact-id }}
+        run: echo  ArtifactId ${{ needs.CI.outputs.artifact-id }}
     
   # # Optional 0 or More CD Jobs as needed
   CD:
@@ -48,13 +48,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
       - name: Skyline DataMiner Deploy Action
         uses: SkylineCommunications/Skyline-DataMiner-Deploy-Action@v1
+              
         with:
           # Stage deploy
-          stage: Deploy
+          stage: All
           # The API-key: generated in the DCP Admin app (https://admin.dataminer.services/) as authentication for a certain DataMiner System.
           api-key: ${{ secrets.DATAMINER_LAKSHMI_DEMO }}
-          solution-path: AutomationScript.sln
+          solution-path: ./${{ steps.findSlnFile.outputs.solutionFilePath }}
           # Id of the uploaded artifact
-          artifact-id: ${{ needs.CI.outputs.artifact-id }}
+          # artifact-id: ${{ needs.CI.outputs.artifact-id }}
+          artifact-name: ${{ github.repository }} ${{ github.ref_name }}
